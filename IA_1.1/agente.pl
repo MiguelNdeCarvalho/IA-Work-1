@@ -1,10 +1,12 @@
-%pesquisa(agente,largura).
+%-------------------------estados--------------------------
 
 estado_inicial((6, 1)).
 
 estado_final((0, 4)).
 
 list_Xs([(0, 2), (1, 0), (1, 2), (1, 6), (3, 3), (4, 3), (5, 3)]).
+
+
 %-------------------------restriçoes--------------------------
 
 safe_position((X,Y)) :- list_Xs(L),
@@ -13,6 +15,7 @@ safe_position((X,Y)) :- list_Xs(L),
 
 perimetro((X,Y)) :- X >= 0, X =< 6,
                     Y >= 0, Y =< 6.
+
 
 %-------------------------operações--------------------------
 
@@ -29,6 +32,7 @@ op((X, Y), sobe, (Z, Y),1) :- Z is X-1,
 op((X, Y), desce, (Z, Y),1) :-  Z is X+1,
 								safe_position((Z, Y)). 
 
+
 %-------------------------heuristicas--------------------------
 
 /*h((X,Y), Val):- estado_final((Xf, Yf)),
@@ -41,7 +45,9 @@ h((X,Y), Val):- estado_final((Xf, Yf)),
 				modDif(Y, Yf, Vj),
 				max(V, Vi, Vj), Val is V.
 
+
 %--------------------------AUXILIAR--------------------------
+
 modDif(I, J, D):- I > J,
 				  D is I-J.
 
