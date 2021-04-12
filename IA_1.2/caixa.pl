@@ -1,64 +1,94 @@
-%pesquisa(work,largura).
+estado_inicial(s(a(6, 1), c(5, 1))).
 
-%new_state(X´s;S;A)
+estado_final(s(a(_, _), c(0, 4))).
 
-estado_inicial(((6,1),(5,1))).
-
-estado_final(((_,_),(0,4))).
-
-list_Xs([(0,2),(1,0),(1,2),(1,6),(3,3),(4,3),(5,3)]).
+list_Xs([p(0, 2), p(1, 0), p(1, 2), p(1, 6), p(4, 3), p(5, 3)]).
 %-------------------------restriçoes--------------------------
 
-%safe_position((0,4),[(0,2),(1,0),(1,2),(1,6),(3,3),(4,3),(5,3)]).
-safe_position((X,Y)) :- list_Xs(L), perimetro((X,Y)), \+ member((X,Y),L).
+safe_position(a(X, Y)):- list_Xs(L),
+						 perimetro(p(X, Y)),
+						 \+member(p(X, Y), L).
+
+safe_position(c(X, Y)):- list_Xs(L),
+						 perimetro(p(X, Y)),
+						 \+ member(p(X, Y), L).
 
 %A não pode sair do perimetro da sala
-%perimetro((1,0)).
-perimetro((X,Y)) :- X >= 0, X =< 6,
-                    Y >= 0, Y =< 6.
+perimetro(p(X, Y)) :- X >= 0, X =< 6,
+                      Y >= 0, Y =< 6.
 
 %-------------------------operações--------------------------
 
 %op(Estado_act,operador,Estado_seg,Custo)
-op( ((Xa,Ya),(Xc,Yc)) ,emp_esq, ((Xa,Za),(Xc,Zc)) ,1) :-  Za is Ya-1,Zc is Yc-1,Xc==Xa,Yc==Za, safe_position((Xa,Za)),safe_position((Xc,Zc)). 
-op( ((Xa,Ya),(Xc,Yc)) ,move_esq, ((Xa,Za),(Xc,Yc)) ,1) :- Za is Ya-1,Xc \= Xa,Yc \= Za, safe_position((Xa,Za)). 
+op(s(a(Xa, Ya), c(Xc, Yc)) ,emp_esq, s(a(Xa, Za), c(Xc, Zc)) ,1):- Za is Ya-1,
+																   Zc is Yc-1,
+																   Xc==Xa,
+																   Yc==Za,
+																   safe_position(a(Xa, Za)),
+																   safe_position(c(Xc, Zc)). 
+
+op(s(a(Xa, Ya), c(Xc, Yc)) ,move_esq, s(a(Xa, Za), c(Xc, Yc)) ,1):- Za is Ya-1,
+																	(Xc \= Xa;
+																	Yc \= Za),
+																	safe_position(a(Xa, Za)). 
 
 
-op(((Xa,Ya),(Xc,Yc)),emp_dir,((Xa,Za),(Xc,Zc)),1) :-  Za is Ya+1,Zc is Yc+1, Xc==Xa,Yc==Za, safe_position((Xa,Za)),safe_position((Xc,Zc)). 
-op(((Xa,Ya),(Xc,Yc)),move_dir,((Xa,Za),(Xc,Yc)),1) :-  Za is Ya+1, Xc \= Xa,Yc \= Za, safe_position((Xa,Za)). 
+op(s(a(Xa, Ya), c(Xc, Yc)), emp_dir, s(a(Xa, Za), c(Xc, Zc)), 1):- Za is Ya+1,
+																   Zc is Yc+1,
+																   Xc==Xa,
+																   Yc==Za,
+																   safe_position(a(Xa, Za)),
+																   safe_position(c(Xc, Zc)).
+
+op(s(a(Xa, Ya), c(Xc, Yc)), move_dir, s(a(Xa, Za), c(Xc, Yc)), 1):- Za is Ya+1,
+																    (Xc \= Xa;
+																    Yc \= Za),
+																    safe_position(a(Xa, Za)). 
 
 
-op(((Xa,Ya),(Xc,Yc)),emp_sobe,((Za,Ya),(Zc,Yc)),1) :- Za is Xa-1,Zc is Xc-1, Xc==Za,Yc==Ya, safe_position((Xa,Za)),safe_position((Xc,Zc)).
-op(((Xa,Ya),(Xc,Yc)),move_sobe,((Za,Ya),(Xc,Yc)),1) :- Za is Xa-1,Xc \= Za,Yc \= Ya, safe_position((Xa,Za)).
+op(s(a(Xa, Ya), c(Xc, Yc)), emp_sobe, s(a(Za, Ya), c(Zc, Yc)), 1):- Za is Xa-1,
+																	Zc is Xc-1,
+																	Xc==Za,
+																	Yc==Ya,
+																	safe_position(a(Za, Ya)),
+																	safe_position(c(Zc, Yc)).
 
-op(((Xa,Ya),(Xc,Yc)),emp_desce,((Za,Ya),(Zc,Yc)),1) :- Za is Xa+1,Zc is Xc+1, Xc==Za,Yc==Ya, safe_position((Xa,Za)),safe_position((Xc,Zc)).
-op(((Xa,Ya),(Xc,Yc)),move_desce,((Za,Ya),(Xc,Yc)),1) :- Za is Xa+1,Xc \= Za,Yc \= Ya, safe_position((Xa,Za)).
+op(s((Xa, Ya), c(Xc, Yc)), move_sobe, s(a(Za, Ya), c(Xc, Yc)), 1):- Za is Xa-1,
+																	(Xc \= Za;
+																	Yc \= Ya),
+																	safe_position(a(Za, Ya)).
 
+
+op(s(a(Xa, Ya), c(Xc, Yc)), emp_desce, s(a(Za, Ya), c(Zc, Yc)), 1):- Za is Xa+1,
+																	 Zc is Xc+1,
+																	 Xc==Za,
+																	 Yc==Ya,
+																	 safe_position(a(Za, Ya)),
+																	 safe_position(c(Zc, Yc)).
+
+op(s(a(Xa, Ya), c(Xc, Yc)), move_desce, s(a(Za, Ya), c(Xc, Yc)), 1):- Za is Xa+1,
+																	  (Xc \= Za;
+																	  Yc \= Ya),
+																	  safe_position(c(Za, Ya)).
 %-------------------------heuristicas--------------------------
 
-%h((X,Y),Val):- estado_final((Xf,Yf)), modDif(X, Xf, Vi), modDif(Y, Yf, Vj), Val is (Vi+Vj).
+/*h((X, Y), Val):- estado_final((Xf, Yf)),
+				 modDif(X, Xf, Vi),
+				 modDif(Y, Yf, Vj),
+				 Val is (Vi+Vj).*/
 
-h((X,Y),Val):- estado_final((Xf,Yf)),  modDif(X, Xf, Vi), modDif(Y, Yf, Vj),  max(V,Vi,Vj), Val is V.
+h((X, Y), Val):- estado_final((Xf, Yf)),
+				 modDif(X, Xf, Vi),
+				 modDif(Y, Yf, Vj),
+				 max(V, Vi, Vj),
+				 Val is V.
 
 %--------------------------AUXILIAR--------------------------
-modDif(I,J,D):- I>J, D is I-J.
-modDif(I,J,D):- I =< J, D is J-I.
+modDif(I, J, D):- I > J, D is I-J.
 
-max(Vi,Vi,Vj):-Vi>Vj,!.
-max(Vj,_,Vj).
+modDif(I, J, D):- I =< J, D is J-I.
 
 
-% a)
-% b)
-% ci) prof-9;larg-
-%
-% f) a*-51/25 ;gready-9/1
-%    (visitados,lista)
-%
-%
-%
-%
-%
-%
-%
-%
+max(Vi, Vi, Vj):- Vi > Vj, !.
+
+max(Vj, _, Vj).

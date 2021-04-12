@@ -9,7 +9,7 @@
         N1 is N+1,
         asserta(nos(N1)).
 
-  actmax(N):- maxNL(N1), N1 >= N,!.
+  actmax(N):- maxNL(N1), N1 >= N, !.
   actmax(N):- retract(maxNL(_N1)),
               asserta(maxNL(N)).
 
@@ -41,7 +41,7 @@ pesquisa_a([E|R], Sol):- inc,
                          actmax(N),
                          pesquisa_a(Resto, Sol).
 
-pesquisa_g([no(E, Pai, Op, C, HC, P)|_], no(E, Pai, Op, C, HC, P)):- estado_final(E).
+pesquisa_g([no(E, Pai, Op, C, HC, P)|_], no(E, Pai, Op, C, HC, P)):- estado_final(E), inc.
 
 pesquisa_g([E|R], Sol):- inc,
                          asserta(fechado(E)),
