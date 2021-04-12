@@ -85,7 +85,6 @@ expandePl(no(E, Pai, Op, C, P), [], Pl):- Pl =< P, !.
 expandePl(no(E, Pai, Op, C, P), L, _):- findall(no(En, no(E, Pai, Op, C, P), Opn, Cnn, P1),
                                                (op(E, Opn, En, Cn),
                                                     P1 is P+1,
-                                                    h(En, H),
                                                     Cnn is Cn+C),
                                                L).
 

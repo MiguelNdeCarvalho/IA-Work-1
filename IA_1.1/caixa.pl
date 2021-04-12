@@ -66,22 +66,22 @@ op(s(a(Xa, Ya), c(Xc, Yc)), emp_desce, s(a(Za, Ya), c(Zc, Yc)), 1):- Za is Xa+1,
 																	 safe_position(a(Za, Ya)),
 																	 safe_position(c(Zc, Yc)).
 
-op(s(a(Xa, Ya), c(Xc, Yc)), move_desce, s(a(Za, Ya), c(Xc, Yc)), 1):- Za is Xa+1,
+op(s(a(Xa, Ya), c(Xc, Yc)), move_desce, s(a(Za, Ya), c(Xc, Yc)), 1):- Za is Xa+1,                               
 																	  (Xc \= Za;
 																	  Yc \= Ya),
 																	  safe_position(c(Za, Ya)).
 %-------------------------heuristicas--------------------------
 
-/*h((X, Y), Val):- estado_final((Xf, Yf)),
-				 modDif(X, Xf, Vi),
-				 modDif(Y, Yf, Vj),
-				 Val is (Vi+Vj).*/
-
 h((X, Y), Val):- estado_final((Xf, Yf)),
 				 modDif(X, Xf, Vi),
 				 modDif(Y, Yf, Vj),
+				 Val is (Vi+Vj).
+
+/*h((X, Y), Val):- estado_final((Xf, Yf)),
+				 modDif(X, Xf, Vi),
+				 modDif(Y, Yf, Vj),
 				 max(V, Vi, Vj),
-				 Val is V.
+				 Val is V.*/
 
 %--------------------------AUXILIAR--------------------------
 modDif(I, J, D):- I > J, D is I-J.

@@ -1,4 +1,4 @@
-%pesquisa(work,largura).
+%pesquisa(agente,largura).
 
 estado_inicial((6, 1)).
 
