@@ -2,16 +2,19 @@
 :- dynamic(maxNL/1).
 :- dynamic(nos/1).
 
-  maxNL(0).
-  nos(0).
 
-  inc:- retract(nos(N)),
-        N1 is N+1,
-        asserta(nos(N1)).
+maxNL(0).
+nos(0).
 
-  actmax(N):- maxNL(N1), N1 >= N, !.
-  actmax(N):- retract(maxNL(_N1)),
-              asserta(maxNL(N)).
+
+inc:- retract(nos(N)),
+      N1 is N+1,
+      asserta(nos(N1)).
+
+
+actmax(N):- maxNL(N1), N1 >= N, !.
+actmax(N):- retract(maxNL(_N1)),
+            asserta(maxNL(N)).
 
 
 pesquisa(Problema, Alg):- consult(Problema),
@@ -84,6 +87,7 @@ expandePl(no(E, Pai, Op, C, P), [], Pl):- Pl =< P, !.
 
 expandePl(no(E, Pai, Op, C, P), L, _):- findall(no(En, no(E, Pai, Op, C, P), Opn, Cnn, P1),
                                                (op(E, Opn, En, Cn),
+                                                    \+ fechado(En),
                                                     P1 is P+1,
                                                     Cnn is Cn+C),
                                                L).
