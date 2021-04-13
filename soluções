@@ -1,30 +1,36 @@
 1) a) Fazer tabela(ta no discord)
-   b) Profundidade
-   ci) 46
-   cii) 22
+   b) Largura
+   ci) 64
+   cii) 36
    d) g-gready; a*-admissivel(max)
-   e) gready
+   e) gready, porque apesar de ter o mesmo custo que o a* visita menos nos (10vs44) e tem menos nos em memoria (11vs22).
    fi) 10
-   fii) 12
+   fii) 11
+
+|   nome Alg     | nº nós vist | nº nós mem | encontra solução | melhor solução
+│   -------------+-------------+------------+------------------+----------------
+│   largura      |      64     |     36     |      :check:     |  :check:                                                                                            
+│   -------------+-------------+------------+------------------+----------------  
+│   profundidade |    20       |     15     |      :check:     |  :X:
+│   -------------+-------------+------------+------------------+----------------
+│   iterativo    |    3968322  |      18    |      :check      |  :X:
 
 2) a) Fazer tabela(ta no discord)
-   b) Profundidade
-   ci) 1989
-   cii) 180
+   b) Largura
+   ci) 4211
+   cii) 606
    d) g-gready; a*-admissivel(max)
    e) gready
    fi) 341
    fii) 46
-
-   largura, profundidade, iterativa
    
    nome Alg     | nº nós vist | nº nós mem | encontra solução | melhor solução
    -------------+-------------+------------+------------------+----------------
-   largura      |             |            |                  |
+   largura      |    4211     |   606      |    :check:       | :check:
    -------------+-------------+------------+------------------+----------------
-   profundidade |             |            |                  |
+   profundidade |    1989     |   180      |    :check        | :X:
    -------------+-------------+------------+------------------+----------------
-   iterativo    |             |            |                  |
+   iterativo    |    ----     |   ----     |     :X:          | :X:
    
    
    pni, agente, it
