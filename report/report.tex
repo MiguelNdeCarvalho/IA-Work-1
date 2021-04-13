@@ -38,11 +38,102 @@
 \maketitle
 
 % -------------------------------------------------------------------------------------------
-\section{Introdução} 
+1 - a) O espaço de estados e os operadores de transição de estados encontra-se no ficheiro
 
-\hspace{0,5cm}Text
+\hspace{1,1cm}\verb|agente.pl|.
+
+\hspace{0,6cm}b) Utilizar os seguintes comandos \verb|[pni].| e em seguida 
+\verb|pesquisa(agente,largura).|
+
+\hspace{0,6cm}c)
+
+\hspace{1cm}i. O número de estados visitados pelo algoritmo das linhas anteriores é \textbf{64}.
+
+\hspace{1cm}ii. O número de estados visitados que estão simultaneamente em memória é \textbf{36}.
+
+\hspace{0,6cm}d) As duas heurísticas admissíveis para estimar o custo de um estado até à solução
+
+\hspace{1,1cm}são \textbf{Heurística Greedy} (g) e a \textbf{Heurística A*} (a).
+
+\hspace{0,6cm}e) Utilizar os seguintes comandos \verb|[pi].| e em seguida 
+\verb|pesquisa(agente,g).|
+
+\hspace{0,6cm}f)
+
+\hspace{1cm}i. O número de estados visitados pelo algoritmo das linhas anteriores é \textbf{10}.
+
+\hspace{1cm}ii. O número de estados visitados que estão simultaneamente em memória é \textbf{11}.
+
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l|c|c|c|c}
+            \textbf{Algoritmo} & \textbf{Nº nós visitados} & \textbf{Nº nós em memória} & \textbf{Encontra solução} & \textbf{Melhor solução}\\
+            \hline
+            largura      & 64        & 36 & sim & sim \\
+            \hline
+            profundidade & 20        & 15 & sim & não \\
+            \hline
+            iterativo    & 3968322   & 18 & sim & não \\
+            \hline
+            greedy       & 10        & 11  & sim & sim \\
+            \hline
+            a*           & 44        & 22 & sim & não
+        \end{tabular}
+        \caption{Resumo do problema do Agente.}
+        \label{tab:table1}
+    \end{center}
+\end{table}
+
 % -------------------------------------------------------------------------------------------
-\section{Conclusão}
-\hspace{0,5cm}Text
+\newpage
+
+2 - a) O espaço de estados e os operadores de transição de estados encontra-se no ficheiro
+
+\hspace{1,1cm}\verb|caixa.pl|.
+
+\hspace{0,6cm}b) Utilizar os seguintes comandos \verb|[pni].| e em seguida 
+\verb|pesquisa(caixa,largura).|
+
+\hspace{0,6cm}c)
+
+\hspace{1cm}i. O número de estados visitados pelo algoritmo das linhas anteriores é \textbf{4211}.
+
+\hspace{1cm}ii. O número de estados visitados que estão simultaneamente em memória é \textbf{606}.
+
+\hspace{0,6cm}d) As duas heurísticas admissíveis para estimar o custo de um estado até à solução
+
+\hspace{1,1cm}são \textbf{Heurística Greedy} (g) e a \textbf{Heurística A*} (a).
+
+\hspace{0,6cm}e) Utilizar os seguintes comandos \verb|[pi].| e em seguida 
+\verb|pesquisa(caixa,g).|
+
+\hspace{0,6cm}f)
+
+\hspace{1cm}i. O número de estados visitados pelo algoritmo das linhas anteriores é \textbf{341}.
+
+\hspace{1cm}ii. O número de estados visitados que estão simultaneamente em memória é \textbf{46}.
+
+
+\begin{table}[h!]
+    \begin{center}
+        \begin{tabular}{l|c|c|c|c}
+            \textbf{Algoritmo} & \textbf{Nº nós visitados} & \textbf{Nº nós em memória} & \textbf{Encontra solução} & \textbf{Melhor solução}\\
+            \hline
+            largura      & 4211 & 606 & sim & sim \\
+            \hline
+            profundidade & 1989 & 180 & sim & não \\
+            \hline
+            iterativo    & -    & -   & não & -   \\
+            \hline
+            greedy       & 341  & 46  & sim & sim \\
+            \hline
+            a*           & 2078 & 525 & sim & não
+        \end{tabular}
+        \caption{Resumo do problema da Caixa.}
+        \label{tab:table1}
+    \end{center}
+\end{table}
+
 % -------------------------------------------------------------------------------------------
 \end{document}
